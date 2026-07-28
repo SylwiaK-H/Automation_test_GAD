@@ -5,38 +5,38 @@ test.describe("Reservation", () => {
     await page.goto("/practice/simple-reservation-v1.html");
   });
 
-  test("Simple reservation with one feature", async ({ page }) => {
+  test("simple reservation with one feature", async ({ page }) => {
     // Arrange:
-    const checkboxRole = "checkbox";
-    const checkboxText = "Food";
-    const buttonRole = "button";
-    const reservationDate = "23.10.2024";
-    const resultsTestId = "dti-results";
-    const rowRole = "row";
     const expectedMessage =
       "Reservation for 23.10.2024 with features: Food for total price: 150$";
-    const checkoutButtonText = "Checkout";
+    const resultTestId = "dti-results";
+    const rowRole = "row";
+    const checkBoxName = "Food";
+    const checkboxRole = "checkbox";
+    const buttonRole = "button";
+    const reservationDate = "23.10.2024";
+    const buttonName = "Checkout";
 
-    const resultsLocator = page.getByTestId(resultsTestId);
+    const resultLocator = page.getByTestId(resultTestId);
 
     const checkBoxLocator = page
-      .getByRole(rowRole, { name: checkboxText })
-      .getByRole(checkboxRole);
+    .getByRole(rowRole, { name: checkBoxName })
+    .getByRole(checkboxRole);
 
-    const buttonLocator = page
-      .getByRole(rowRole, { name: reservationDate })
-      .getByRole(buttonRole);
+    const reserveButtonLocator = page
+    .getByRole(rowRole, { name: reservationDate })
+    .getByRole(buttonRole);
 
     const checkoutButtonLocator = page
-      .getByRole(buttonRole)
-      .filter({ hasText: checkoutButtonText });
+    .getByRole(buttonRole)
+    .filter({ hasText: buttonName });
 
-    // Act:
+    //Act:
     await checkBoxLocator.check();
-    await buttonLocator.click();
+    await reserveButtonLocator.click();
     await checkoutButtonLocator.click();
 
     // Assert:
-    await expect(resultsLocator).toHaveText(expectedMessage);
+    await expect(resultLocator).toHaveText(expectedMessage);
   });
 });
