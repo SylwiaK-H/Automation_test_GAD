@@ -6,7 +6,7 @@ test.describe("auto wait exercises", () => {
 
     // Arrange:
     const elementTestId = "dti-button-element-1";
-    const resultsTestId = "dti-button-element-1";
+    const resultsTestId = "dti-results";
     const expectedMessage = "You clicked the button!";
 
     const buttonLocator = page.getByTestId(elementTestId);
@@ -23,8 +23,8 @@ test.describe("auto wait exercises", () => {
     await page.goto("/practice/delayed-elements-and-delayed-result-2.html");
 
     // Arrange:
-    const elementTestId = "dti-button-element-1";
-    const resultsTestId = "dti-button-element-1";
+    const elementTestId = "dti-button-element-2";
+    const resultsTestId = "dti-results";
     const expectedMessage = "You clicked the button! (Delayed)";
 
     const buttonLocator = page.getByTestId(elementTestId);
