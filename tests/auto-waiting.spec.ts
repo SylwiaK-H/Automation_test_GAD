@@ -7,31 +7,32 @@ test.describe.only("Web-first assertions and auto-waiting", () => {
   });
 
 
-//   test("Auto-waiting for elements for action", async ({ page }) => {
-//     // https://playwright.dev/docs/actionability
-//     // Arrange:
-//     const elementTestId = "dti-button-element";
-//     const resultsTestId = "dti-results";
-//     const expectedMessage = "You clicked the button!";
+  test("Auto-waiting for elements for action", async ({ page }) => {
+    // https://playwright.dev/docs/actionability
+    // Arrange:
+    const elementTestId = "dti-button-element";
+    const resultsTestId = "dti-results";
+    const expectedMessage = "You clicked the button!";
 
 
-//     const buttonLocator = page.getByTestId(elementTestId);
-//     const result = page.getByTestId(resultsTestId);
+    const buttonLocator = page.getByTestId(elementTestId);
+    const result = page.getByTestId(resultsTestId);
 
 
-//     // print status of the button at this moment:
-//     console.log("is button visible?", await buttonLocator.isVisible());
+    // print status of the button at this moment:
+    console.log("is button visible?", await buttonLocator.isVisible());
 
 
-//     // Act:
-//     // use auto-waiting during click:
-//     await buttonLocator.click();
+    // Act:
+    // use auto-waiting during click:
+    await buttonLocator.click();
+    await buttonLocator.click();
 
 
-//     // Assert:
-//     // and check the results:
-//     await expect(result).toHaveText(expectedMessage);
-//   });
+    // Assert:
+    // and check the results:
+    await expect(result).toHaveText(expectedMessage);
+  });
 
 
   test("Button visibility (Web-first assertions)", async ({ page }) => {

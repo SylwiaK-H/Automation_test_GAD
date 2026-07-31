@@ -14,6 +14,7 @@ test.describe("auto wait exercises", () => {
 
     // Act:
     await buttonLocator.click();
+    await buttonLocator.click();
 
     // Assert:
     await expect(results).toHaveText(expectedMessage);
