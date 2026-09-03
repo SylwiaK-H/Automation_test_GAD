@@ -1,7 +1,14 @@
 import { defineConfig, devices } from "@playwright/test";
 import path from "path";
 
-export const SESSION_PATH = path.join(__dirname, "./.auth/session.json");
+export const STORAGE_STATE_CREATOR = path.join(
+  __dirname,
+  ".auth/session_creator.json",
+);
+export const STORAGE_STATE_VIEWER = path.join(
+  __dirname,
+  ".auth/session_viewer.json",
+);
 
 export default defineConfig({
   testDir: "./tests",
@@ -21,9 +28,26 @@ export default defineConfig({
       testMatch: /.*\.setup\.ts/,
     },
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"], storageState: SESSION_PATH },
+      name: "chromium-logged-user-creator",
+      grep: /@creator/,
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: STORAGE_STATE_CREATOR,
+      },
       dependencies: ["setup"],
     },
+    {
+      name: "chromium-logged-user-viewer",
+      grep: /@viewer/,
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: STORAGE_STATE_VIEWER,
+      },
+      dependencies: ["setup"],
+    },
+    // {
+    //   name: "chromium",
+    //   use: { ...devices["Desktop Chrome"] },
+    // },
   ],
 });
