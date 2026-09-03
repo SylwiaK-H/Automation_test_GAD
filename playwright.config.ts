@@ -1,4 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
+import path from "path";
+
+export const SESSION_PATH = path.join(__dirname, "./.auth/session.json");
 
 export default defineConfig({
   testDir: "./tests",
@@ -13,8 +16,14 @@ export default defineConfig({
 
   projects: [
     {
-      name: "chromium",
+      name: "setup",
       use: { ...devices["Desktop Chrome"] },
+      testMatch: /.*\.setup\.ts/,
+    },
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"], storageState: SESSION_PATH },
+      dependencies: ["setup"],
     },
   ],
 });
